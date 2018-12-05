@@ -101,11 +101,6 @@ public void keyPressed() {
   }
 }
 
-// Version 3.1
-// This example uses PharusClient class to access pharus data
-// Pharus data is encapsulated into Player objects
-// PharusClient provides an event callback mechanism whenever a player is been updated
-
 PharusClient pc;
 
 private void initPlayerTracking() {
