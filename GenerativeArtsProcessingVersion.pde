@@ -16,6 +16,8 @@ private boolean ShowTrack = true;
 private boolean ShowPath = false;
 private boolean ShowFeet = false;
 
+StateManager sm;
+
 public void settings() {
   size(WindowWidth, WindowHeight);
   smooth(2);
@@ -27,9 +29,21 @@ AudioPlayer input;
 ControlP5 cp5;
 BeatDetect beat;
 
+int EFFECT1;
+int EFFECT2;
+int EFFECT3;
+int EFFECT4;
+
 boolean bool = false;
 
 public void setup() {
+  
+  sm = new StateManager();
+  
+  EFFECT1 = sm.addEffect(new PlexusBall(sm));
+  EFFECT2 = sm.addEffect(new SinCosBall(sm));
+  EFFECT2 = sm.addEffect(new PlexusBall(sm));
+  EFFECT2 = sm.addEffect(new SinCosBall(sm));
 
   frameRate(60);
 
@@ -52,9 +66,6 @@ public void setup() {
 
   noFill();
   //ellipseMode(RADIUS);
-
-  //setupLineBall();
-  setupPlexusBall();
 
   input.play();
 }
@@ -123,25 +134,6 @@ private void drawPlayerTracking() {
     allX += p.x;
     allY += p.y;
 
-    // render path of each track
-    if (ShowPath) {
-      if (p.getNumPathPoints() > 1) {
-        stroke(70, 100, 150, 25.0f);
-        int numPoints = p.getNumPathPoints();
-        int maxDrawnPoints = 300;
-        // show the motion path of each track on the floor
-        float startX = p.getPathPointX(numPoints - 1);
-        float startY = p.getPathPointY(numPoints - 1);
-        for (int pointID = numPoints - 2; pointID > max(0, numPoints - maxDrawnPoints); pointID--) {
-          float endX = p.getPathPointX(pointID);
-          float endY = p.getPathPointY(pointID);
-          line(startX, startY, endX, endY);
-          startX = endX;
-          startY = endY;
-        }
-      }
-    }
-
     // render tracks = player
     float cursor_size = 25;
     if (ShowTrack) {
@@ -156,17 +148,6 @@ private void drawPlayerTracking() {
       //ellipse(p.x, p.y - WallHeight, cursor_size, cursor_size);
       fill(0);
       //text(p.id /*+ "/" + p.tuioId*/, p.x, p.y);
-    }
-
-    // render feet for each track
-    if (ShowFeet) {
-      // show the feet of each track
-      stroke(70, 100, 150, 200);
-      noFill();
-      // paint all the feet that we can find for one character
-      for (Foot f : p.feet) {
-        ellipse(f.x, f.y, cursor_size / 3, cursor_size / 3);
-      }
     }
   }
 
