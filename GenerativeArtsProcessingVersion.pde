@@ -13,8 +13,6 @@ private int WindowHeight = 3712 / shrink; // for real Deep Space this should be 
 private int WallHeight = 1914 / shrink; // for real Deep Space this should be 1914 (Floor is 1798)
 
 private boolean ShowTrack = true;
-private boolean ShowPath = false;
-private boolean ShowFeet = false;
 
 StateManager sm;
 
@@ -29,21 +27,16 @@ AudioPlayer input;
 ControlP5 cp5;
 BeatDetect beat;
 
-int EFFECT1;
-int EFFECT2;
-int EFFECT3;
-int EFFECT4;
-
 boolean bool = false;
 
 public void setup() {
   
   sm = new StateManager();
   
-  EFFECT1 = sm.addEffect(new PlexusBall(sm));
-  EFFECT2 = sm.addEffect(new SinCosBall(sm));
-  EFFECT2 = sm.addEffect(new PlexusBall(sm));
-  EFFECT2 = sm.addEffect(new SinCosBall(sm));
+  sm.addEffect(new PlexusBall());
+  sm.addEffect(new SinCosBall());
+  sm.addEffect(new PlexusBall());
+  sm.addEffect(new SinCosBall());
 
   frameRate(60);
 
@@ -89,27 +82,11 @@ public void draw() {
   strokeWeight(2);
   line(0, WallHeight + (WindowHeight - WallHeight) / 2, WindowWidth, WallHeight + (WindowHeight - WallHeight) / 2);
 
-  drawPlayerTracking();
-
-  if (bool) {
-    drawSinCosBall();
-  } else {
-    drawPlexusBall();
-  }
+  sm.drawFloor();
+  sm.drawCurrentEffect();
 }
 
 public void keyPressed() {
-  switch (key) {
-  case 'p':
-    ShowPath = !ShowPath;
-    break;
-  case 't':
-    ShowTrack = !ShowTrack;
-    break;
-  case 'f':
-    ShowFeet = !ShowFeet;
-    break;
-  }
 }
 
 PharusClient pc;
@@ -120,70 +97,6 @@ private void initPlayerTracking() {
   pc.setMaxAge(50);
   // max distance allowed when jumping between last known position and potential landing position, unit is in pixels relative to window width
   pc.setjumpDistanceMaxTolerance(0.05f);
-}
-
-private void drawPlayerTracking() {
-  // reference for hashmap: file:///C:/Program%20Files/processing-3.0/modes/java/reference/HashMap.html
-
-  float allX = 0;
-  float allY = 0;
-
-  for (HashMap.Entry<Long, Player> playersEntry : pc.players.entrySet()) {
-    Player p = playersEntry.getValue();
-
-    allX += p.x;
-    allY += p.y;
-
-    // render tracks = player
-    float cursor_size = 25;
-    if (ShowTrack) {
-      // show each track with the corresponding  id number
-      noStroke();
-      if (p.isJumping()) {
-        fill(192, 0, 0);
-      } else {
-        fill(192, 192, 192);
-      }
-      ellipse(p.x, p.y, cursor_size, cursor_size);
-      //ellipse(p.x, p.y - WallHeight, cursor_size, cursor_size);
-      fill(0);
-      //text(p.id /*+ "/" + p.tuioId*/, p.x, p.y);
-    }
-  }
-
-  float meanX = allX / pc.players.size();
-  float meanY = allY / pc.players.size();
-
-  fill(255, 0, 0);
-  ellipse(meanX, meanY, 10, 10);
-
-  noFill();
-
-  if (meanY < WallHeight + (WindowHeight - WallHeight) / 2) {
-    if (meanX < WindowWidth / 2) {
-      //System.out.println("Links oben");
-      stroke(0, 0, 255);
-      rect(0, WallHeight, WindowWidth / 2, (WindowHeight - WallHeight) / 2);
-      bool = false;
-    } else {
-      //System.out.println("Rechts oben");
-      stroke(0, 0, 255);
-      rect(WindowWidth / 2, WallHeight, WindowWidth, (WindowHeight - WallHeight) / 2);
-      bool = true;
-    }
-  } else {
-    if (meanX < WindowWidth / 2) {
-      //System.out.println("Links unten");
-      stroke(0, 0, 255);
-      rect(0, WallHeight + (WindowHeight - WallHeight) / 2, WindowWidth / 2, WindowHeight);
-      bool = true;
-    } else {
-      //System.out.println("Rechts unten");
-      stroke(0, 0, 255);
-      rect(WindowWidth / 2, WallHeight + (WindowHeight - WallHeight) / 2, WindowWidth, WindowHeight);
-      bool = false;
-    }
-  }
 }
 
 public void pharusPlayerAdded(Player player) {

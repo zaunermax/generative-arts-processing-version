@@ -9,10 +9,6 @@ class SinCosBall extends Effect {
   float factor = 0.00001f;
   float eRadius;
 
-  SinCosBall(StateManager sm) {
-    super(sm);
-  }
-
   void playEffect() {
 
     //pushMatrix();

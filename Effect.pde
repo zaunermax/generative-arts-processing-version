@@ -1,10 +1,5 @@
 class Effect {
-  StateManager stateMgr;
   int effectId;
-  
-  Effect(StateManager _stateMgr) {
-    stateMgr = _stateMgr;
-  }
   
   void playEffect() {}
   
@@ -14,9 +9,5 @@ class Effect {
 
   int getEffectId() {
     return effectId;
-  }
-  
-  void setStateMgr(StateManager _stateMgr) {
-    stateMgr = _stateMgr;
   }
 }

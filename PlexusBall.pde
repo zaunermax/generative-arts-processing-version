@@ -1,7 +1,6 @@
 class PlexusBall extends Effect {
   
-  PlexusBall(StateManager sm) {
-    super(sm);
+  PlexusBall() {
     setupPlexusBall();
   }
   
