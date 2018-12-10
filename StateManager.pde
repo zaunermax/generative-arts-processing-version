@@ -38,7 +38,7 @@ public class StateManager {
   void drawCurrentEffect() {
     getEffect(currentEffectID).playEffect();
   }
-  
+
   void drawFloor() {
     calculatePositions();
 
@@ -48,25 +48,7 @@ public class StateManager {
     drawPlayers(playerList);
   }
 
-  private void drawPlayers(List<Player> players) {
-    for (Player p : players) {
-      // render tracks = player
-      float cursor_size = 25;
-      if (ShowTrack) {
-        // show each track with the corresponding  id number
-        noStroke();
-        if (p.isJumping()) {
-          fill(192, 0, 0);
-        } else {
-          fill(192, 192, 192);
-        }
-        ellipse(p.x, p.y, cursor_size, cursor_size);
-        //ellipse(p.x, p.y - WallHeight, cursor_size, cursor_size);
-        fill(0);
-        //text(p.id /*+ "/" + p.tuioId*/, p.x, p.y);
-      }
-    }
-  }
+  // private methods
 
   private void calculatePositions() {
     float allX = 0;
@@ -94,7 +76,6 @@ public class StateManager {
 
   private void drawActiveSector() {
     noFill();
-
     if (meanY < WallHeight + (WindowHeight - WallHeight) / 2) {
       if (meanX < WindowWidth / 2) {
         //System.out.println("Links oben");
@@ -123,6 +104,24 @@ public class StateManager {
         bool = false;
         sm.setEffect(3);
       }
+    }
+  }
+
+  private void drawPlayers(List<Player> players) {
+    for (Player p : players) {
+      // render tracks = player
+      //float cursor_size = 25;
+      //noStroke();
+      //if (p.isJumping()) {
+      //  fill(192, 0, 0);
+      //} else {
+      //  fill(192, 192, 192);
+      //}
+      //ellipse(p.x, p.y, cursor_size, cursor_size);
+      //ellipse(p.x, p.y - WallHeight, cursor_size, cursor_size);
+      //fill(0);
+      //text(p.id /*+ "/" + p.tuioId*/, p.x, p.y);
+      p.playPlayerEffect();
     }
   }
 }

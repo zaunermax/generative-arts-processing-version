@@ -12,10 +12,8 @@ private int WindowWidth = 3030 / shrink; // for real Deep Space this should be 3
 private int WindowHeight = 3712 / shrink; // for real Deep Space this should be 3712
 private int WallHeight = 1914 / shrink; // for real Deep Space this should be 1914 (Floor is 1798)
 
-private boolean ShowTrack = true;
-
 public void settings() {
-  size(WindowWidth, WindowHeight);
+  size(WindowWidth, WindowHeight, P2D);
   smooth(2);
   //fullScreen(P2D, SPAN);
 }
@@ -70,15 +68,19 @@ public void draw() {
   // set upper half of window (=wall projection) bluish
   noStroke();
   fill(32);
-  rect(0, 0, WindowWidth, WallHeight);
+  rect(0, 0, WindowWidth, WindowHeight);
   fill(150);
   text((int) frameRate + " FPS", width / 2, 10);
 
-  stroke(0, 0, 0);
+  stroke(255, 255, 255);
+  strokeWeight(2);
+  line(0, WallHeight, WindowWidth, WallHeight);
+  
+  stroke(255, 255, 255);
   strokeWeight(2);
   line(WindowWidth / 2, WallHeight, WindowWidth / 2, WindowHeight);
 
-  stroke(0, 0, 0);
+  stroke(255, 255, 255);
   strokeWeight(2);
   line(0, WallHeight + (WindowHeight - WallHeight) / 2, WindowWidth, WallHeight + (WindowHeight - WallHeight) / 2);
 
