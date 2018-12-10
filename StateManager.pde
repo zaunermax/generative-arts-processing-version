@@ -4,6 +4,11 @@ public class StateManager {
   int currentEffectID;
   int sectorActive;
 
+  float meanX;
+  float meanY;
+
+  List<Player> playerList;
+
   int addEffect(Effect effect) {
     if (effects.size() > 3) return -1;
     effects.add(effect);
@@ -34,7 +39,16 @@ public class StateManager {
     getEffect(currentEffectID).playEffect();
   }
   
-  void drawPlayers(List<Player> players) {
+  void drawFloor() {
+    calculatePositions();
+
+    drawMeanPosition();
+    drawActiveSector();
+
+    drawPlayers(playerList);
+  }
+
+  private void drawPlayers(List<Player> players) {
     for (Player p : players) {
       // render tracks = player
       float cursor_size = 25;
@@ -54,11 +68,11 @@ public class StateManager {
     }
   }
 
-  void drawFloor() {
+  private void calculatePositions() {
     float allX = 0;
     float allY = 0;
 
-    ArrayList<Player> playerList = new ArrayList<Player>();
+    playerList = new ArrayList<Player>();
 
     for (HashMap.Entry<Long, Player> playersEntry : pc.players.entrySet()) {
       Player p = playersEntry.getValue();
@@ -69,12 +83,16 @@ public class StateManager {
       playerList.add(p);
     }
 
-    float meanX = allX / pc.players.size();
-    float meanY = allY / pc.players.size();
+    meanX = allX / pc.players.size();
+    meanY = allY / pc.players.size();
+  }
 
+  private void drawMeanPosition() {
     fill(255, 0, 0);
     ellipse(meanX, meanY, 10, 10);
+  }
 
+  private void drawActiveSector() {
     noFill();
 
     if (meanY < WallHeight + (WindowHeight - WallHeight) / 2) {
@@ -106,7 +124,5 @@ public class StateManager {
         sm.setEffect(3);
       }
     }
-    
-    drawPlayers(playerList);
   }
 }

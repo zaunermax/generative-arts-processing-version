@@ -14,8 +14,6 @@ private int WallHeight = 1914 / shrink; // for real Deep Space this should be 19
 
 private boolean ShowTrack = true;
 
-StateManager sm;
-
 public void settings() {
   size(WindowWidth, WindowHeight);
   smooth(2);
@@ -28,6 +26,8 @@ ControlP5 cp5;
 BeatDetect beat;
 
 boolean bool = false;
+
+StateManager sm;
 
 public void setup() {
   
