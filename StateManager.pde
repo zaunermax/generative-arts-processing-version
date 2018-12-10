@@ -42,8 +42,8 @@ public class StateManager {
   void drawFloor() {
     calculatePositions();
 
-    drawMeanPosition();
     drawActiveSector();
+    drawMeanPosition();
 
     drawPlayers(playerList);
   }
@@ -70,38 +70,45 @@ public class StateManager {
   }
 
   private void drawMeanPosition() {
-    fill(255, 0, 0);
-    ellipse(meanX, meanY, 10, 10);
+    noStroke();
+    fill(255);
+    ellipse(meanX, meanY, WallHeight*0.03, WallHeight*0.03);
   }
 
   private void drawActiveSector() {
+
+    float bottomHeight = WindowHeight - WallHeight;
+    float bottomSphereDims = bottomHeight * 0.8;
+    float bottomMiddleSphereDims = bottomHeight * 0.15;
+
+    noStroke();
+
+    fill(0, 153, 153, 40);
+    ellipse(WindowWidth / 2, WallHeight + bottomHeight / 2, bottomSphereDims, bottomSphereDims);
+
+    fill(0, 153, 153, 80);
+    ellipse(WindowWidth / 2, WallHeight + bottomHeight / 2, bottomMiddleSphereDims, bottomMiddleSphereDims);
+
     noFill();
+
     if (meanY < WallHeight + (WindowHeight - WallHeight) / 2) {
       if (meanX < WindowWidth / 2) {
-        //System.out.println("Links oben");
-        stroke(0, 0, 255);
-        rect(0, WallHeight, WindowWidth / 2, (WindowHeight - WallHeight) / 2);
-        bool = false;
+        fill(0, 153, 153, 70);
+        arc(WindowWidth / 2, WallHeight + bottomHeight / 2, bottomSphereDims, bottomSphereDims, PI, PI + HALF_PI); //LINKS oben
         sm.setEffect(0);
       } else {
-        //System.out.println("Rechts oben");
-        stroke(0, 0, 255);
-        rect(WindowWidth / 2, WallHeight, WindowWidth, (WindowHeight - WallHeight) / 2);
-        bool = true;
+        fill(0, 153, 153, 70);
+        arc(WindowWidth / 2, WallHeight + bottomHeight / 2, bottomSphereDims, bottomSphereDims, PI + HALF_PI, PI * 2); //RECHTS oben
         sm.setEffect(1);
       }
     } else {
       if (meanX < WindowWidth / 2) {
-        //System.out.println("Links unten");
-        stroke(0, 0, 255);
-        rect(0, WallHeight + (WindowHeight - WallHeight) / 2, WindowWidth / 2, WindowHeight);
-        bool = true;
+        fill(0, 153, 153, 70);
+        arc(WindowWidth / 2, WallHeight + bottomHeight / 2, bottomSphereDims, bottomSphereDims, HALF_PI, PI); //LINKS unten
         sm.setEffect(2);
       } else {
-        //System.out.println("Rechts unten");
-        stroke(0, 0, 255);
-        rect(WindowWidth / 2, WallHeight + (WindowHeight - WallHeight) / 2, WindowWidth, WindowHeight);
-        bool = false;
+        fill(0, 153, 153, 70);
+        arc(WindowWidth / 2, WallHeight + bottomHeight / 2, bottomSphereDims, bottomSphereDims, 0, HALF_PI); //rechts unten
         sm.setEffect(3);
       }
     }
@@ -109,18 +116,6 @@ public class StateManager {
 
   private void drawPlayers(List<Player> players) {
     for (Player p : players) {
-      // render tracks = player
-      //float cursor_size = 25;
-      //noStroke();
-      //if (p.isJumping()) {
-      //  fill(192, 0, 0);
-      //} else {
-      //  fill(192, 192, 192);
-      //}
-      //ellipse(p.x, p.y, cursor_size, cursor_size);
-      //ellipse(p.x, p.y - WallHeight, cursor_size, cursor_size);
-      //fill(0);
-      //text(p.id /*+ "/" + p.tuioId*/, p.x, p.y);
       p.playPlayerEffect();
     }
   }

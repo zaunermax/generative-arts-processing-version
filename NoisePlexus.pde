@@ -41,9 +41,9 @@ class NoisePlexus extends PlayerEffect {
   }
 
   float noiseScale = 0.01;
-  float radius = 50;
+  float radius = 30;
   float particleSize = 5;
-  int numOfParticles = 5;
+  int numOfParticles = 8;
   float strokeThickness = 2;
   float maxStrokeLength = 50;
 

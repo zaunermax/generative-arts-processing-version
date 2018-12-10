@@ -1,9 +1,9 @@
 class PlexusBall extends Effect {
-  
+
   PlexusBall() {
     setupPlexusBall();
   }
-  
+
   //creates an array for the points
   Particle[] p = new Particle[100];
   //radius of the grey circle in the middle
@@ -22,6 +22,7 @@ class PlexusBall extends Effect {
   float amplitudeThreshold = 0.45f; //threshold for the beat effect
 
   float plexusSize; // size of the circles and lines of the plexuseffect
+  float c= random(0, 255);
 
   void setupPlexusBall() {
     // if portrait or landscape mode
@@ -55,20 +56,24 @@ class PlexusBall extends Effect {
     if (amplitude > amplitudeThreshold) rad = rad * 0.9f; //circle shriks at beat
     else rad = radReset;
     //creates circle
-    fill(-1, 100);
+    //fill(-1, 100);
     noStroke();
+
+    fill(51, 204, 255, 60);
     ellipse(WindowWidth / 2, WallHeight / 2, 2 * rad, 2 * rad);
 
     int bsize = input.bufferSize();
 
     //creates lines on the outer circle - react with audio
-    stroke(-1, 50);
+    //stroke(-1, 50);
+
     strokeWeight(5); //thickness
     for (int i = 0; i < bsize - 1; i += 5) {
       float x = (ampLineRadius) * cos(i * 2 * PI / bsize);
       float y = (ampLineRadius) * sin(i * 2 * PI / bsize);
       float x2 = (ampLineRadius + input.left.get(i) * ampLineLength) * cos(i * 2 * PI / bsize);
       float y2 = (ampLineRadius + input.left.get(i) * ampLineLength) * sin(i * 2 * PI / bsize);
+      stroke(0, 102, 153, 90);
       line(x + WindowWidth / 2, y + WallHeight / 2, x2 + WindowWidth / 2, y2 + WallHeight / 2);
     }
 
@@ -83,6 +88,7 @@ class PlexusBall extends Effect {
       pushStyle();
       stroke(-1);
       strokeWeight(4);  // Point thickness
+      stroke(153, 204, 255);
       point(x2 + WindowWidth / 2, y2 + WallHeight / 2);
       popStyle();
     }
@@ -117,10 +123,11 @@ class PlexusBall extends Effect {
     float dist = sqrt(dx * dx + dy * dy);
 
     strokeWeight(plexusSize * 0.5f);
-    stroke(-1, 50);
+    // stroke(-1, 50);
+    stroke(0, 153, 153, 60);
+
     if (dist < 100) {
       //float alpha = 10 + (dist/100) * 200;
-
       line(p1.x, p1.y, p2.x, p2.y);
     }
   }

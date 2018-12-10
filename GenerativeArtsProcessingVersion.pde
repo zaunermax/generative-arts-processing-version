@@ -72,18 +72,6 @@ public void draw() {
   fill(150);
   text((int) frameRate + " FPS", width / 2, 10);
 
-  stroke(255, 255, 255);
-  strokeWeight(2);
-  line(0, WallHeight, WindowWidth, WallHeight);
-  
-  stroke(255, 255, 255);
-  strokeWeight(2);
-  line(WindowWidth / 2, WallHeight, WindowWidth / 2, WindowHeight);
-
-  stroke(255, 255, 255);
-  strokeWeight(2);
-  line(0, WallHeight + (WindowHeight - WallHeight) / 2, WindowWidth, WallHeight + (WindowHeight - WallHeight) / 2);
-
   sm.drawFloor();
   sm.drawCurrentEffect();
 }
