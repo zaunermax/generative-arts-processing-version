@@ -70,9 +70,10 @@ public class StateManager {
   }
 
   private void drawMeanPosition() {
+    float percentage = 0.03;
     noStroke();
     fill(255);
-    ellipse(meanX, meanY, WallHeight*0.03, WallHeight*0.03);
+    ellipse(meanX, meanY, WallHeight * percentage, WallHeight * percentage);
   }
 
   private void drawActiveSector() {
