@@ -31,10 +31,15 @@ public void setup() {
   
   sm = new StateManager();
   
-  sm.addEffect(new PlexusBall());
+  sm.addEffect(new SphericalWave());
   sm.addEffect(new SinCosBall());
   sm.addEffect(new PlexusBall());
+  sm.addEffect(new ParticleFlow());
+/*  sm.addEffect(new PlexusBall());
   sm.addEffect(new SinCosBall());
+  sm.addEffect(new PlexusBall());
+  sm.addEffect(new SinCosBall());*/
+
 
   frameRate(60);
 
