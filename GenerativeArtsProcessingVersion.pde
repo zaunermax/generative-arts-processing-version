@@ -7,7 +7,7 @@ import controlP5.*;
 // Version 3.1
 // Example implemenation which shows the usage of the new PharusClient
 
-private int shrink = 4;
+private int shrink = 1;
 private int WindowWidth = 3030 / shrink; // for real Deep Space this should be 3030
 private int WindowHeight = 3712 / shrink; // for real Deep Space this should be 3712
 private int WallHeight = 1914 / shrink; // for real Deep Space this should be 1914 (Floor is 1798)
@@ -15,7 +15,7 @@ private int WallHeight = 1914 / shrink; // for real Deep Space this should be 19
 public void settings() {
   size(WindowWidth, WindowHeight, P2D);
   smooth(2);
-  //fullScreen(P2D, SPAN);
+  fullScreen(P2D, SPAN);
 }
 
 Minim minim;
