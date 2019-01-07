@@ -41,15 +41,19 @@ class NoisePlexus extends PlayerEffect {
   }
 
   float noiseScale = 0.01;
-  float radius = 30;
-  float particleSize = 5;
+  float radius = WallHeight * 0.065;
+  float particleSize = WallHeight * 0.01;
   int numOfParticles = 8;
-  float strokeThickness = 2;
-  float maxStrokeLength = 50;
+  float strokeThickness = WallHeight * 0.003;
+  float maxStrokeLength = radius * 2;
 
   Particle particles[] = new Particle[numOfParticles];
 
   NoisePlexus() {
+    println("radius", radius);
+    println("particleSize", particleSize);
+    println("strokeThickness", strokeThickness);
+    println("maxStrokeLength", maxStrokeLength);
     for (int i = 0; i < numOfParticles; i++) {
       particles[i] = new Particle(particleSize, radius);
     }

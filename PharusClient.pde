@@ -209,7 +209,7 @@ public class PharusClient extends PApplet
       }
       else
       {
-        println("unkown foot id: " + to.getSymbolID());
+        //println("unkown foot id: " + to.getSymbolID());
       } 
     }
     

@@ -1,21 +1,20 @@
 class ParticleFlow extends Effect {
 
-  float circle = 200;
-  float rot;
-  float col;
-  float freq = 0.000005; 
+  float freq = 0.000005;
   int cont = 0;
+  float size = WallHeight * 0.35;
+  float v1 = 0.4f;
+  
+  float maxStrokeLength=1000;
+  float strokeThickness=2;
+  
+  float circle;
+  float rot;
+  float col; 
   float r;
   float greenmix;
   float bluemix;
-
-
-  float v1 = 0.4f;
   float eRadius;
-
-
-  float maxStrokeLength=1000;
-  float strokeThickness=2;
 
   ParticleFlow() {
   } 
@@ -24,15 +23,18 @@ class ParticleFlow extends Effect {
 
     translate(WindowWidth / 2, WallHeight / 2);
     //rotate(radians(rot));
+    
+    float tmpSize = size;
 
     beat.detect(input.mix);
     // Trigger der BeatDetection
     if (beat.isOnset()) {
-      v1 = random(0.4f) + 0.2f;
+      //v1 = random(0.4f) + 0.2f;
+      tmpSize += WallHeight * 0.01;
     }
 
     for (int i=0; i<500; i ++) {
-      circle= 200 + 50*sin(millis()*freq*i)*(v1*2);
+      circle= tmpSize + 50*sin(millis()*freq*i)*(v1*2);
       col=map(circle, 150, 250, 160, 150);
       r=map(circle, 150, 250, 10, 5);
       greenmix= map(circle, 150, 250, 220, 200);
@@ -41,7 +43,7 @@ class ParticleFlow extends Effect {
       noStroke();
       // stroke(153, 204, 255);
       ellipse(circle*cos(i), circle*sin(i), (r*2)*v1, (r*2)*v1); 
-      SpringTo(circle*cos(i)*(v1), circle*sin(i)*(v1), ((WallHeight/2)-(WallHeight/5))*random(0.7f),( WallHeight/2- WallHeight+(WallHeight/5))*random(0.7f)); //first x,y start then x,y end try to get variation and make it bound somewhere in the middle
+      //SpringTo(circle*cos(i)*(v1), circle*sin(i)*(v1), ((WallHeight/2)-(WallHeight/5))*random(0.7f),( WallHeight/2- WallHeight+(WallHeight/5))*random(0.7f)); //first x,y start then x,y end try to get variation and make it bound somewhere in the middle
       rot=rot+0.00005;
     }
   }
@@ -54,9 +56,9 @@ class ParticleFlow extends Effect {
     greenmix= map(circle, 150, 250, 170, 120);
 
     if (dist < maxStrokeLength) {
-      stroke(70, greenmix, 150, 30);
-      strokeWeight(strokeThickness*(v1*5));
-      line(x, y, xOrigin, yOrigin);
+    //stroke(70, greenmix, 150, 30);
+    //strokeWeight(strokeThickness*(v1*5));
+    //line(x, y, xOrigin, yOrigin);
     }
   }
 }

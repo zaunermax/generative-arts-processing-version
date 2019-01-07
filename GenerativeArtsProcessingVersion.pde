@@ -31,15 +31,14 @@ public void setup() {
   
   sm = new StateManager();
   
-  sm.addEffect(new SphericalWave());
-  sm.addEffect(new SinCosBall());
   sm.addEffect(new PlexusBall());
+  sm.addEffect(new SinCosBall());
   sm.addEffect(new ParticleFlow());
+  sm.addEffect(new PlexusBall());
 /*  sm.addEffect(new PlexusBall());
   sm.addEffect(new SinCosBall());
   sm.addEffect(new PlexusBall());
   sm.addEffect(new SinCosBall());*/
-
 
   frameRate(60);
 
@@ -55,7 +54,7 @@ public void setup() {
   minim = new Minim(this);
   cp5 = new ControlP5(this);
   beat = new BeatDetect();
-  input = minim.loadFile("skrillex.mp3");
+  input = minim.loadFile("hundredBeanie.wav");
 
   //fftLog = new FFT( input.bufferSize(), input.sampleRate());
   //fftLog.logAverages( 22, 3);;
@@ -64,6 +63,7 @@ public void setup() {
   //ellipseMode(RADIUS);
 
   input.play();
+  input.loop();
 }
 
 public void draw() {
