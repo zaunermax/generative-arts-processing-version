@@ -13,7 +13,7 @@ int max = 330;
 
 float size = WallHeight * 0.004;
 
-
+  color colSphericalWave= color(206,107, 163);
 
 
  SphericalWave(){
@@ -51,6 +51,9 @@ void playEffect() {
       ellipse(x*v1, y, 1*size, 1*size);
     }
   }
+  
+  sm.setColor(colSphericalWave);
+  
   popMatrix();
 }
 }

@@ -6,9 +6,14 @@ public class StateManager {
 
   float meanX;
   float meanY;
+  color col;
 
   List<Player> playerList;
 
+  void setColor(color colEffect){
+    col = colEffect;
+  }
+  
   int addEffect(Effect effect) {
     if (effects.size() > 3) return -1;
     effects.add(effect);
@@ -47,6 +52,8 @@ public class StateManager {
 
     drawPlayers(playerList);
   }
+  
+  
 
   // private methods
 
@@ -84,31 +91,31 @@ public class StateManager {
 
     noStroke();
 
-    fill(0, 153, 153, 40);
+    fill(col, 40);
     ellipse(WindowWidth / 2, WallHeight + bottomHeight / 2, bottomSphereDims, bottomSphereDims);
 
-    fill(0, 153, 153, 80);
+   fill(col, 80);
     ellipse(WindowWidth / 2, WallHeight + bottomHeight / 2, bottomMiddleSphereDims, bottomMiddleSphereDims);
 
     noFill();
 
     if (meanY < WallHeight + (WindowHeight - WallHeight) / 2) {
       if (meanX < WindowWidth / 2) {
-        fill(0, 153, 153, 70);
+        fill(col, 70);
         arc(WindowWidth / 2, WallHeight + bottomHeight / 2, bottomSphereDims, bottomSphereDims, PI, PI + HALF_PI); //LINKS oben
         sm.setEffect(0);
       } else {
-        fill(0, 153, 153, 70);
+        fill(col, 70);
         arc(WindowWidth / 2, WallHeight + bottomHeight / 2, bottomSphereDims, bottomSphereDims, PI + HALF_PI, PI * 2); //RECHTS oben
         sm.setEffect(1);
       }
     } else {
       if (meanX < WindowWidth / 2) {
-        fill(0, 153, 153, 70);
+        fill(col, 70);
         arc(WindowWidth / 2, WallHeight + bottomHeight / 2, bottomSphereDims, bottomSphereDims, HALF_PI, PI); //LINKS unten
         sm.setEffect(2);
       } else {
-        fill(0, 153, 153, 70);
+        fill(col, 70);
         arc(WindowWidth / 2, WallHeight + bottomHeight / 2, bottomSphereDims, bottomSphereDims, 0, HALF_PI); //rechts unten
         sm.setEffect(3);
       }
