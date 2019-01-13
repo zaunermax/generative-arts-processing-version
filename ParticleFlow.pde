@@ -35,15 +35,15 @@ class ParticleFlow extends Effect {
     translate(WindowWidth / 2, WallHeight / 2);
     //rotate(radians(rot));
     
-    float tmpSize = size;
+    float tmpSize = size*1.1;
     float tmpSize2 = size *0.4;
     
     beat.detect(input.mix);
     // Trigger der BeatDetection
     if (beat.isOnset()) {
       v1 = random(0.1f) + WallHeight*0.0009;
-      tmpSize += WallHeight * 0.01;
-      tmpSize2 -= WallHeight * 0.01;
+      tmpSize += WallHeight * 0.04;
+      tmpSize2 -= WallHeight * 0.04;
     }
 
     for (int i=0; i<500; i ++) {
@@ -51,12 +51,10 @@ class ParticleFlow extends Effect {
       col=map(circle, 150, 250, 160, 150);
       r=map(circle, 150, 250, 10, 5);
       greenmix= map(circle, 150, 250, 220, 200);
-      bluemix= map(circle, 150, 250, 255, 230);
-      fill(51, 220, bluemix);
+      bluemix= map(circle, 10, 250, 110, 250);
+      fill(51, 220, bluemix,98);
       noStroke();
-      // stroke(153, 204, 255);
       ellipse(circle*cos(i), circle*sin(i), (r*2)*v1, (r*2)*v1); 
-      //SpringTo(circle*cos(i)*(v1), circle*sin(i)*(v1), ((WallHeight/2)-(WallHeight/5))*random(0.7f),( WallHeight/2- WallHeight+(WallHeight/5))*random(0.7f)); //first x,y start then x,y end try to get variation and make it bound somewhere in the middle
       rot=rot+0.00005;
     }
     
@@ -65,7 +63,7 @@ class ParticleFlow extends Effect {
       col2=map(circle2, 150, 250, 160, 150);
       r2=map(circle2, 50, 150, 10, 5);
       greenmix2= map(circle2, 150, 250, 220, 200);
-      fill(51, 220, bluemix);
+      fill(51, 220, bluemix,98);
       noStroke();
       ellipse(circle2*cos(j), circle2*sin(j), (r2-WallHeight*0.0009), (r2-WallHeight*0.0009)); 
       rot=rot+0.00005;

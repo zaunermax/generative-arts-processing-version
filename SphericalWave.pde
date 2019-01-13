@@ -37,7 +37,7 @@ void playEffect() {
     }
   
   translate(WindowWidth /2, WallHeight/2 );
-  fill(206,107, 163);
+  fill(206,107, 163,90);
   
   pushMatrix();
   
