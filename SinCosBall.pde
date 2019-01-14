@@ -10,6 +10,8 @@ class SinCosBall extends Effect {
   float factor = 0.00001f;
   float eRadius;
   color colSinCosBall = color(0, 113, 175);
+  float strokeWeight = WallHeight * 0.013;
+  float lineWeight = WallHeight * 0.005f;
 
   void playEffect() {
     angle += 0.01;
@@ -25,12 +27,12 @@ class SinCosBall extends Effect {
     if (eRadius < 0.1) eRadius = 0.1f;
 
     for (int i = 1; i < lines; i++) {
-      strokeWeight(4); 
+      strokeWeight(strokeWeight); 
       stroke(7, 61, 91);
       point(x(t + i), y(t + i));
       stroke(0, 99, 153);
       point(x2(t + i), y2(t + i));
-      strokeWeight(1.2f);
+      strokeWeight(lineWeight);
       stroke(32, 142, 201, 90);
       line(x(t + i) * eRadius, y(t + i) * eRadius, x2(t + i) * eRadius, y2(t + i) * eRadius);
     }

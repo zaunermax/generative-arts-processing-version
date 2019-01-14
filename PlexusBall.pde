@@ -40,7 +40,7 @@ class PlexusBall extends Effect {
     
     plexusRadius = ampLineRadius;
     plexusJitter = int(size * 0.04);
-    plexusSize = size * 0.004f;
+    plexusSize = size * 0.006f;
 
     //construct particles
     for (int i = 0; i < p.length; i++) {
